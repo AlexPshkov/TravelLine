@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQL_Task_1", "SQL_Task_1\SQL_Task_1.csproj", "{CDF0D5F3-0697-4AAE-A74F-D3DA8B288E5E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQL_Task_2", "SQL_Task_2\SQL_Task_2.csproj", "{5059C0BE-BEB4-456C-8052-6CABCC782FF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{CDF0D5F3-0697-4AAE-A74F-D3DA8B288E5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDF0D5F3-0697-4AAE-A74F-D3DA8B288E5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDF0D5F3-0697-4AAE-A74F-D3DA8B288E5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5059C0BE-BEB4-456C-8052-6CABCC782FF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5059C0BE-BEB4-456C-8052-6CABCC782FF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5059C0BE-BEB4-456C-8052-6CABCC782FF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5059C0BE-BEB4-456C-8052-6CABCC782FF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
