@@ -13,7 +13,7 @@ namespace SQL_Task_2;
 public class SimpleSQLProgram
 {
     private static readonly CommandsManager CommandsManager = new CommandsManager();
-    private static readonly IRepository StorageRepository = new SqlRepository<MySqlConnection>("TravelLine"); //Доступны: MySqlConnection, SqliteConnection, SqlConnection
+    private static readonly IRepository StorageRepository = new SqlRepository<SqliteConnection>("TravelLine"); //Доступны: MySqlConnection, SqliteConnection, SqlConnection
     
     
     /**

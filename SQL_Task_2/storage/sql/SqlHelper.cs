@@ -17,9 +17,9 @@ public static class SqlHelper
     {
         return typeof( T ).Name switch
         {
-            nameof( SqlConnection ) => new SqliteParameter(name, value),
+            nameof( SqlConnection ) => new SqlParameter(name, value),
             nameof( MySqlConnection ) => new MySqlParameter(name, value),
-            nameof( SqliteConnection ) => new MySqlParameter(name, value),
+            nameof( SqliteConnection ) => new SqliteParameter(name, value),
             _ => throw new ApplicationException( "Invalid connection type" )
         };
     }

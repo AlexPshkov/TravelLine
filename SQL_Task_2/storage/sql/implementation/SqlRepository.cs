@@ -151,6 +151,7 @@ public class SqlRepository<TU>: AbstractRepository, IRepository where TU : DbCon
             {
                 var value = reader[fieldInfo.Name];
                 if ( value is DBNull ) value = null;
+                if ( value is Int64 ) value = Convert.ToInt32( value );
                 fieldInfo.SetValue( resultEntity, value );
             }
 
