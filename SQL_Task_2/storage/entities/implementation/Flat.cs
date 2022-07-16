@@ -1,4 +1,4 @@
-﻿namespace SQL_Task_2.sys.storage.entities.implementation
+﻿namespace SQL_Task_2.storage.entities.implementation
 {
     public class Flat : AbstractEntity
     {
@@ -6,7 +6,7 @@
     
         public int FlatNumber;
 
-        public Flat( int uuid ) : base( uuid )
+        public Flat() : base( 0 )
         {
             HouseId = 0;
             FlatNumber = 0;

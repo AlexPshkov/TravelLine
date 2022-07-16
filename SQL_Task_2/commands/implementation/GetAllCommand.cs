@@ -1,12 +1,9 @@
-﻿using SQL_Task_2.sys.storage.entities;
-using SQL_Task_2.sys.storage.entities.implementation;
+﻿using SQL_Task_2.storage.entities;
 
-namespace SQL_Task_2.sys.commands.implementation;
+namespace SQL_Task_2.commands.implementation;
 
 public class GetAllCommand : AbstractCommand
 {
-    private const string Label = "get-all"; //Command name
-
     public override void Run( string[] args )
     {
         if ( args.Length < 2 )
@@ -27,41 +24,35 @@ public class GetAllCommand : AbstractCommand
             for ( var i = 2; i < args.Length; i++ ) condition += args[i] + " ";
         }
 
-        switch ( args[1].ToLower() ) //Available tables
+        try
         {
-            case "citizen":
-                GetFor( new Citizen( 0 ), condition );
-                break;
-            case "city":
-                GetFor( new City( 0 ), condition );
-                break;
-            case "flat":
-                GetFor( new Flat( 0 ), condition );
-                break;
-            case "house":
-                GetFor( new House( 0 ), condition );
-                break;
-            default:
-            {
-                WriteColorLine( $"Type {args[1]} doesn't exists", ConsoleColor.Red );
-                return;
-            }
+            var entity = GetEntityByName( args[1].ToLower() );
+            WriteListFor( entity, condition );
+        }
+        catch ( ArgumentException )
+        {
+            WriteColorLine( $"Type {args[1]} doesn't exists", ConsoleColor.Red );
         }
     }
 
     /**
      * Gets list for some entity
      */
-    private void GetFor<T>( T reqEntity, string condition ) where T : AbstractEntity
+    private void WriteListFor( AbstractEntity reqEntity, string condition )
     {
         var result = SimpleSQLProgram.GetStorageRepository().LoadAllFromStorage( reqEntity, condition ).Result;
         WriteColorLine(
             $"============ [List of {reqEntity.GetType().Name} objects. Amount is {result.Count}] ============" ); //Visualize objects list
         result.ForEach( entity => WriteColorLine( $" - {entity}" ) );
-        if ( condition.Length > 0 ) WriteColorLine( " Current condition: " + condition, ConsoleColor.Green );
+        if ( condition.Length > 0 ) WriteColorLine( " > Current condition: " + condition, ConsoleColor.Green );
         WriteColorLine( $"===============================================================" );
     }
 
+    public override string GetLabel()
+    {
+        return "get-all"; //Command name
+    } 
+    
     public override string GetHelp()
     {
         return "Gets list of all objects in storage"; //Command info
@@ -69,10 +60,6 @@ public class GetAllCommand : AbstractCommand
 
     public override string GetUsage()
     {
-        return "get-all <city | flat | citizen | house> [condition]"; //Command usage
-    }
-
-    public GetAllCommand() : base( Label )
-    {
+        return $"get-all <{GetStringWithAvailableEntities()}> [condition]"; //Command usage
     }
 }

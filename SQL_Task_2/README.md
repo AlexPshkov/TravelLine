@@ -1,23 +1,28 @@
 ﻿# SQL_Task_2
- ### Консольная приложенька для простой работы с бд
+### Консольная приложенька для простой работы с бд
 
 ---
-#### **ВНИМАНИЕ!** В качестве СУБД используется MySQL, а это значит, что для
-тестирования этого приложения она будет так же необходима
+#### Для работы доступны СУБД: **MySQL (рекомендовано)**, **SQLite**, **MS SQL** 
+
+
+> Для смены СУБД достаточно заменить `MySqlConnection`
+  ```C#
+private static readonly IRepository StorageRepository = new SqlRepository<MySqlConnection>("TravelLine");
+  ```
 
 ---
 Доступные команды
 ------ 
 - **help** - Показать список всех доступных команд
   > Все команды подгружаются автоматически. Достаточно лишь экстенднуть класс `AbstractCommand`
-  
+
   ![alt-текст](https://alexpshkov.ru/screens/help-command.gif)
 
 ---
 - **get-all** `<city | flat | citizen | house> [condition]` - Показать список всех объектов
-    > Будут выведены все объекты из одной таблицы. С помощью условия можно выбрать какие объекты вам нужны
+  > Будут выведены все объекты из одной таблицы. С помощью условия можно выбрать какие объекты вам нужны
 
-    ![alt-текст](https://alexpshkov.ru/screens/get-all.gif)
+  ![alt-текст](https://alexpshkov.ru/screens/get-all.gif)
 ---
 - **update** `<city | flat | citizen | house> <ID>` - Обновить все поля у сущности
   > В случае неверно введенного значения вас уведомят. Не беспокойтесь)
@@ -34,7 +39,11 @@
   > Многоэтажкой считается дом с кол-вом этажей >= 10
 
   ![alt-текст](https://alexpshkov.ru/screens/get-citizen-skyscrapers.gif)
+---
+- **fill-data** - Заполнить БД данными
+  > Данная команда выполнит скрипт `SqlScripts/INSERT_SOME_DATA.sql`
 
+  ![alt-текст](https://alexpshkov.ru/screens/fill-data.gif)
 ---
 - **exit** - Завершить выполнение программы
   ![alt-текст](https://alexpshkov.ru/screens/exit.gif)

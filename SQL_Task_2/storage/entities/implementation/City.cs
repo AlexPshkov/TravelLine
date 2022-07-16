@@ -1,4 +1,4 @@
-﻿namespace SQL_Task_2.sys.storage.entities.implementation;
+﻿namespace SQL_Task_2.storage.entities.implementation;
 
 public class City : AbstractEntity
 {
@@ -6,7 +6,7 @@ public class City : AbstractEntity
     public string Region;
     public string CityName;
 
-    public City( int uuid ) : base( uuid )
+    public City() : base( 0 )
     {
         Country = "Empty";
         Region = "Empty";

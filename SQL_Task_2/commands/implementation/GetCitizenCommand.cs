@@ -1,11 +1,9 @@
-﻿using SQL_Task_2.sys.storage.entities.implementation;
+﻿using SQL_Task_2.storage.entities.implementation;
 
-namespace SQL_Task_2.sys.commands.implementation;
+namespace SQL_Task_2.commands.implementation;
 
 public class GetCitizenCommand : AbstractCommand
 {
-    private const string Label = "get-citizen-skyscrapers"; //Command name
-
     public override void Run( string[] args )
     {
         List<Citizen> citizens = SimpleSQLProgram.GetStorageRepository().GetCitizensInSkyscrapers().Result;
@@ -15,6 +13,11 @@ public class GetCitizenCommand : AbstractCommand
         WriteColorLine($"==============================================================="); 
     }
 
+    public override string GetLabel()
+    {
+        return "get-citizen-skyscrapers"; //Command name
+    } 
+    
     public override string GetHelp()
     {
         return "Gets list of citizens in houses with floorsNumber >= 10"; //Command info
@@ -23,9 +26,5 @@ public class GetCitizenCommand : AbstractCommand
     public override string GetUsage()
     {
         return "get-citizen-skyscrapers"; //Command usage
-    }
-
-    public GetCitizenCommand() : base( Label )
-    {
     }
 }

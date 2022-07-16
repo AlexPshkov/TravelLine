@@ -1,4 +1,4 @@
-﻿namespace SQL_Task_2.sys.storage.entities.implementation;
+﻿namespace SQL_Task_2.storage.entities.implementation;
 
 public partial class House : AbstractEntity
 {
@@ -8,7 +8,7 @@ public partial class House : AbstractEntity
     public int FloorsNumber;
     public string HouseNumber;
 
-    public House( int uuid) : base( uuid )
+    public House() : base( 0 )
     {
         StreetName = "Empty";
         CityId = 0;

@@ -1,13 +1,9 @@
-﻿using SQL_Task_2.sys.storage;
-using SQL_Task_2.sys.storage.entities;
-using SQL_Task_2.sys.storage.entities.implementation;
+﻿using SQL_Task_2.storage.entities;
 
-namespace SQL_Task_2.sys.commands.implementation;
+namespace SQL_Task_2.commands.implementation;
 
 public class UpdateCommand : AbstractCommand
 {
-    private const string Label = "update"; //Command name
-
     public override void Run( string[] args )
     {
         if ( args.Length < 3 )
@@ -16,56 +12,32 @@ public class UpdateCommand : AbstractCommand
             return;
         }
 
-        int entityId;
         try
         {
-            entityId = Convert.ToInt32( args[2] ); //Check if ID is invalid
-        }
-        catch ( Exception )
-        {
-            WriteColorLine( "Bad ID type. It must be Int32", ConsoleColor.Red );
-            return;
-        }
+            var entityId = Convert.ToInt32( args[2] ); //Check if ID is invalid
+            var entity = GetEntityByName( args[1].ToLower() );
+            entity.UUID = entityId;
+            var repository = SimpleSQLProgram.GetStorageRepository();
+            var result = repository.LoadFromStorage( entity ).Result;
 
-        switch ( args[1].ToLower() )
-        {
-            case "citizen":
-                CheckAndUpdate( new Citizen( entityId ) );
-                break;
-            case "city":
-                CheckAndUpdate( new City( entityId ) );
-                break;
-            case "flat":
-                CheckAndUpdate( new Flat( entityId ) );
-                break;
-            case "house":
-                CheckAndUpdate( new House( entityId ) );
-                break;
-            default:
+            if ( result == null )
             {
-                WriteColorLine( $"Type { args[1] } doesn't exists", ConsoleColor.Red );
+                WriteColorLine( $"There is no such field with ID {entityId}", ConsoleColor.Red );
                 return;
             }
+        
+            UpdateObject( result ); //Update
         }
-    }
-
-    /**
-     * Make check and update if OK
-     */
-    private void CheckAndUpdate( AbstractEntity abstractEntity )
-    {
-        IRepository repository = SimpleSQLProgram.GetStorageRepository();
-        var result = repository.LoadFromStorage( abstractEntity ).Result;
-
-        if ( result == null )
+        catch ( FormatException )
         {
-            WriteColorLine( $"There is no such field with ID {abstractEntity.UUID}", ConsoleColor.Red );
-            return;
+            WriteColorLine( "Bad ID type. It must be Int32", ConsoleColor.Red );
         }
-
-        UpdateObject( result ); //Update
+        catch ( ArgumentException )
+        {
+            WriteColorLine( $"Table {args[1]} doesn't exists", ConsoleColor.Red );
+        }
     }
-
+    
     /**
      * Update object in db
      */
@@ -104,6 +76,11 @@ public class UpdateCommand : AbstractCommand
         else WriteColorLine( $"Some error while updating field with ID {abstractEntity.UUID}", ConsoleColor.Red );
     }
 
+    public override string GetLabel()
+    {
+        return "update"; //Command name
+    } 
+    
     public override string GetHelp()
     {
         return "Updates all fields by ID"; //Command info
@@ -111,10 +88,6 @@ public class UpdateCommand : AbstractCommand
 
     public override string GetUsage()
     {
-        return "update <city | flat | citizen | house> <ID>"; //Command usage
-    }
-
-    public UpdateCommand() : base( Label )
-    {
+        return $"update <{GetStringWithAvailableEntities()}> <ID>"; //Command usage
     }
 }

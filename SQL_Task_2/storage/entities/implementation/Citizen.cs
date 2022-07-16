@@ -1,4 +1,4 @@
-﻿namespace SQL_Task_2.sys.storage.entities.implementation;
+﻿namespace SQL_Task_2.storage.entities.implementation;
 
 public class Citizen : AbstractEntity
 {
@@ -7,7 +7,7 @@ public class Citizen : AbstractEntity
     public string FirstName;
     public string LastName;
     
-    public Citizen( int uuid ) : base( uuid )
+    public Citizen() : base( 0 )
     {
         FlatId = 0;
         FirstName = "Empty";

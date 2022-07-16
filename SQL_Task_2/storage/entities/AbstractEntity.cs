@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace SQL_Task_2.sys.storage.entities;
+namespace SQL_Task_2.storage.entities;
 
 public abstract class AbstractEntity: ICloneable
 {
