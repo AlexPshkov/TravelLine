@@ -1,0 +1,58 @@
+<footer>
+  <h1 class="label">Simple select</h1>
+
+  <form [formGroup]="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Select type</mat-label>
+      <mat-select [formControl]="control" (selectionChange)="makeSearch()">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let model of availableModels" [value]="model">{{model}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+</footer>
+
+<div class="container">
+
+  <mat-card class="card" *ngFor="let city of citiesList">
+    <mat-card-title-group>
+      <mat-card-title>{{city.cityName}}</mat-card-title>
+      <mat-card-subtitle>Region: {{city.region}}</mat-card-subtitle>
+      <img mat-card-sm-image src="./assets/icons/city.png">
+    </mat-card-title-group>
+    <mat-card-content></mat-card-content>
+  </mat-card>
+
+  <mat-card class="card" *ngFor="let house of housesList">
+    <mat-card-title-group>
+      <mat-card-title>House number: {{house.houseNumber}}</mat-card-title>
+      <mat-card-subtitle>Address: {{house.streetName}}</mat-card-subtitle>
+      <img mat-card-sm-image src="./assets/icons/house.png">
+    </mat-card-title-group>
+    <mat-card-content></mat-card-content>
+  </mat-card>
+
+  <mat-card class="card" *ngFor="let flat of flatList">
+    <mat-card-title-group>
+      <mat-card-title>Flat number: {{flat.flatNumber}}</mat-card-title>
+      <mat-card-subtitle>House number: {{flat.house.houseNumber}}</mat-card-subtitle>
+            <img mat-card-sm-image src="./assets/icons/flat.png">
+    </mat-card-title-group>
+    <mat-card-content></mat-card-content>
+  </mat-card>
+
+  <mat-card class="card" *ngFor="let citizen of citizenList">
+    <mat-card-title-group>
+      <mat-card-title>FirstName: {{citizen.firstName}}</mat-card-title>
+      <mat-card-subtitle>LastName: {{citizen.lastName}}</mat-card-subtitle>
+            <img mat-card-sm-image src="./assets/icons/citizen.png">
+    </mat-card-title-group>
+    <mat-card-content></mat-card-content>
+  </mat-card>
+
+  <h2 *ngIf="isEmpty()" class="empty-message">There's no one object :(</h2>
+</div>
+
+
+

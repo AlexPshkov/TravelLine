@@ -1,0 +1,47 @@
+$main-color: #464646;
+
+.label {
+  color: white;
+  padding: 1rem 2rem;
+}
+
+footer {
+  height: 4rem;
+  display: flex;
+  background-color: $main-color;
+}
+
+form {
+  display: flex;
+  margin-top: 0.4rem;
+}
+
+.container {
+  width: 87%;
+  display: flex;
+  flex-wrap: wrap;
+
+  padding: 5rem;
+}
+
+.card {
+  display: flex;
+  margin: 1rem;
+  flex-direction: column;
+}
+
+.card mat-card-title  {
+  display: flex;
+}
+
+.card img  {
+  margin-left: 2rem;
+}
+
+.empty-message {
+  margin: auto;
+  letter-spacing: 0.3em;
+}
+
+
+
