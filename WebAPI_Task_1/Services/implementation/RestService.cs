@@ -25,7 +25,11 @@ public class RestService : IRestService
         var resultList = new List<object>();
         switch ( entityName )
         {
-            case "city": return new List<object> { list.ConvertAll( item => item.ConvertToDto() ) };
+            case "city":
+            {
+                list.ForEach( item => resultList.Add( ((City)item).ConvertToDto() ));
+                return resultList;
+            }
             case "house":
             {
                 list.ForEach( item =>
