@@ -1,0 +1,21 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$primary-mat: mat.define-palette(mat.$gray-palette, 500);
+$accent-mat: mat.define-palette(mat.$yellow-palette, A200, A100, A400);
+$mat-typography: mat.define-typography-config($font-family: 'Roboto');
+
+$my-theme: mat.define-dark-theme((
+  color: (
+    primary: $primary-mat,
+    accent: $accent-mat
+  ),
+  background: mat.get-color-from-palette($primary-mat, 'darker'),
+  typography: $mat-typography,
+));
+
+@include mat.all-component-themes($my-theme);
+
+html, body { height: 100%; }
+body { margin: 0; }
